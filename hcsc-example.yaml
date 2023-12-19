@@ -11,7 +11,7 @@ spec:
   owner: david.stewart
   type: environment
   parameters:
-    - title: Project Details
+    - title: Project and Repo Details
       required:
         - requester_email
         - project
@@ -19,18 +19,18 @@ spec:
         requester_email:
           title: Enter your email
           type: string
-          description: Your emial address
+          description: yourEmailAddress
         project:
-          title: What project will this infrastructure be associated with?
+          title: What project will this infra be associated with?
           type: string
-          description: A project name/project ID
-        # This field below is hidden but needed to authenticate the request to trigger the pipeline
+          description: projectID
+        # This field is hidden but needed to authenticate the request to trigger the pipeline
         token:
           title: Harness Token
           type: string
           ui:widget: password
           ui:field: HarnessAuthToken
-    - title: Additional Project Details
+    - title: Pass Variables Here
       properties:
         exampleVar:
           title: Select an option
@@ -43,10 +43,9 @@ spec:
       action: trigger:harness-custom-pipeline
       input:
         url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/HCSC_IDP_Example/pipeline-studio/?storeType=INLINE'
-        #url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE'
         inputset:
           exampleVar: ${{ parameters.exampleVar }}
-          owner: ${{ parameters.requester_email }}
+          requester_email: ${{ parameters.requester_email }}
           project: ${{ parameters.project }}
         apikey: ${{ parameters.token }}
 
