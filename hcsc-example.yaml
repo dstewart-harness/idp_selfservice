@@ -6,7 +6,7 @@ metadata:
   description: Use IDP to call a Harness IACM Pipeline with some provided inputs/variables
   tags:
     - example
-    - HCSC
+    - hcsc
 spec:
   owner: david.stewart
   type: environment
