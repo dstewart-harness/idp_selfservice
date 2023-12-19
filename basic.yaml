@@ -2,11 +2,10 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: harness_iac
-  title: Create Infra via Harness IaCM 
-  description: Uses Harness-IaC to dynamically provision any required infrastructure.
+  title: Call a pipeline via Harness IDP
+  description: Use IDP to call a harness pipeline and pass it some variables
   tags:
-    - aws
-    - azure 
+    - example
 spec:
   owner: david.stewart
   type: environment
@@ -31,45 +30,16 @@ spec:
           type: string
           ui:widget: password
           ui:field: HarnessAuthToken
-    - title: Infrastructure Details
+    - title: Pass Variables Here
       properties:
-        cloud_provider:
-          title: Choose a cloud provider
+        exampleVar:
+          title: Select an option
           type: string
-          enum: ["AWS", "Azure", "OCI"]
-          default: AWS
-        tech_stack:
-          title: Choose the Underlying Infra
-          type: string
-          enum: ["K8s", "VM", "ECS", "Lambda"]
-          default: VM
-        instance_type:
-          title: Chose the Instance Type
-          type: string
-          enum: ["t2.micro", "t2.large", "t3.2xlarge", "other"]
-          default: t2.micro
-        ami:
-          title: Choose desired AMI
-          type: string
-          enum: ["ami-09ff94ae883853013", "ami-0ff8a91507f77f867", "ami-0ad8219dfgh45742d", "ami-0cf24653bcf894797"]
-          default: ami-09ff94ae883853013
-        subnet:
-          title: Choose desired subnet
-          type: string
-          enum: ["Create New", "subnet-16dad05b", "subnet-34da30rt", "subnet-76j1hag5", "subnet-94s21hr1"]
-          default: subnet-16dad05b
-        vpc:
-          title: Choose VPC security group
-          type: string
-          enum: ["Create New", "sg-078339fd2b4e5b1a5", "sg-024561fd2344e5brte", "sg-03sdf832dfe5b1n3"]
-          default: sg-078339fd2b4e5b1a5
-        count:
-          title: Choose desired instance count (i.e. How many VMs?)
-          type: string
-          default: "1"
+          enum: ["Option1", "Option2", "Option3"]
+          default: Option1
   steps:
     - id: trigger
-      name: Provisioning your Infrastructure
+      name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
       input:
         url: 'https://app.harness.io/ng/account/6_vVHzo9Qeu9fXvj-AcbCQ/home/orgs/default/projects/Platform_Demo/pipelines/IaCM_Provision_EC2_Instance/pipeline-studio/?storeType=INLINE'
