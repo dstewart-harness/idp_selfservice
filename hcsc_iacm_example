@@ -1,0 +1,55 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: harness_hcsc_iacm_example
+  title: Call an IaCM pipeline - HCSC AWS Provisioning
+  description: Use IDP to call a Harness IACM Pipeline with some provided inputs/variables
+  tags:
+    - example
+    - HCSC
+spec:
+  owner: david.stewart
+  type: environment
+  parameters:
+    - title: Project Details
+      required:
+        - requester_email
+        - project
+      properties:
+        requester_email:
+          title: Enter your email
+          type: string
+          description: Your emial address
+        project:
+          title: What project will this infrastructure be associated with?
+          type: string
+          description: A project name/project ID
+        # This field below is hidden but needed to authenticate the request to trigger the pipeline
+        token:
+          title: Harness Token
+          type: string
+          ui:widget: password
+          ui:field: HarnessAuthToken
+    - title: Additional Project Details
+      properties:
+        exampleVar:
+          title: Select an option
+          type: string
+          enum: ["Option1", "Option2", "Option3"]
+          default: Option1
+  steps:
+    - id: trigger
+      name: Call a harness pipeline, and pass the variables from above
+      action: trigger:harness-custom-pipeline
+      input:
+        url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE'
+        inputset:
+          exampleVar: ${{ parameters.exampleVar }}
+          owner: ${{ parameters.requester_email }}
+          project: ${{ parameters.project }}
+        apikey: ${{ parameters.token }}
+
+  output:
+    links:
+      - title: Pipeline Details
+        url: ${{ steps.trigger.output.PipelineUrl }}
