@@ -44,6 +44,7 @@ spec:
       input:
         url: 'https://app.harness.io/ng/account/6_vVHzo9Qeu9fXvj-AcbCQ/home/orgs/default/projects/Platform_Demo/pipelines/IaCM_Provision_EC2_Instance/pipeline-studio/?storeType=INLINE'
         inputset:
+          exampleVar: ${{ parameters.exampleVar }}
           owner: ${{ parameters.owner }}
         apikey: ${{ parameters.token }}
 
