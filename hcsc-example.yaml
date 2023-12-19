@@ -42,7 +42,7 @@ spec:
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
       input:
-        url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE'
+        url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/HCSC_IDP_Example/pipeline-studio/?storeType=INLINE'
         inputset:
           exampleVar: ${{ parameters.exampleVar }}
           owner: ${{ parameters.requester_email }}
