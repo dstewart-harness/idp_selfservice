@@ -2,13 +2,11 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: harness_iac
-  title: Create Infra via Harness IaC 
+  title: Create Infra via Harness IaCM 
   description: Uses Harness-IaC to dynamically provision any required infrastructure.
   tags:
-    - tf
     - aws
-    - gcp
-    - azure
+    - azure 
 spec:
   owner: david.stewart
   type: environment
@@ -38,7 +36,7 @@ spec:
         cloud_provider:
           title: Choose a cloud provider
           type: string
-          enum: ["GCP", "AWS", "Azure", "OCI"]
+          enum: ["AWS", "Azure", "OCI"]
           default: AWS
         tech_stack:
           title: Choose the Underlying Infra
