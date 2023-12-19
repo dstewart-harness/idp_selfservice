@@ -1,0 +1,18 @@
+kind: Component
+apiVersion: backstage.io/v1alpha1
+metadata:
+  name: ECS
+  title: ECS
+  tags: []
+  annotations:
+    harness.io/project-url: https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/details
+    harness.io/cd-serviceId: ECS
+    harness.io/services: |
+      ECS: https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/cd/orgs/default/projects/DavidStewart_Sandbox/services/ECS
+spec:
+  type: Service
+  lifecycle: Unknown
+  owner: Unknown
+  domain: default
+  system: DavidStewart_Sandbox
+
