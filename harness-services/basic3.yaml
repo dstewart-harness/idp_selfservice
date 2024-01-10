@@ -56,7 +56,7 @@ spec:
       input:
         url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE'
         inputset:
-          exampleVar: ${{ join(parameters.exampleVar, ':') }}
+          exampleVar: ${{ join(map(parameters.exampleVar, (item) => `'${item}'`), ',') }}
           owner: ${{ parameters.owner }}
         apikey: ${{ parameters.token }}
 
