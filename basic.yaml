@@ -18,8 +18,9 @@ spec:
         owner:
           title: Choose the Owner
           type: string
-          ui:field: OwnerPicker
-          ui:options: null
+          ui:
+            field: OwnerPicker
+            options: null
         github_repo:
           title: What App/Repo will this infra be associated with?
           type: string
@@ -27,8 +28,9 @@ spec:
         token:
           title: Harness Token
           type: string
-          ui:widget: password
-          ui:field: HarnessAuthToken
+          ui:
+            widget: password
+            field: HarnessAuthToken
     - title: Pass Variables Here
       properties:
         exampleVar:
@@ -37,9 +39,9 @@ spec:
           items:
             type: string
             enum:
-            - Option1
-            - Option2
-            - Option3
+              - Option1
+              - Option2
+              - Option3
           default:
             - Option1
       ui:
@@ -48,24 +50,23 @@ spec:
           multi: true
   steps: 
     - id: transformVariables
-    name: transform Variables
-    action: script
-    input: 
-      content: |
-        // Convert the array to a comma-separated string
-        const exampleVarString = parameters.exampleVar.join(',');
+      name: transform Variables
+      action: script
+      input: 
+        content: |
+          // Convert the array to a comma-separated string
+          const exampleVarString = parameters.exampleVar.join(',');
 
-        // Set the converted string as a new parameter
-        parameters.exampleVarString = exampleVarString;
-    output: {}
-  steps:
+          // Set the converted string as a new parameter
+          parameters.exampleVarString = exampleVarString;
+      output: {}
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
       input:
         url: https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE
         inputset:
-          exampleVar: ${{ paramaters.exampleVarString }}
+          exampleVar: ${{ parameters.exampleVarString }}
           owner: ${{ parameters.owner }}
         apikey: ${{ parameters.token }}
   output:
