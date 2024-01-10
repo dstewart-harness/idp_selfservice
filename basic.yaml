@@ -34,9 +34,13 @@ spec:
       properties:
         exampleVar:
           title: Select an option
-          type: string
+          type: array
           enum: ["Option1", "Option2", "Option3"]
-          default: Option1
+          default: ["Option1"]  # Default should be an array with one or more options
+      ui:
+        exampleVar:
+          title: Select options
+          multi: true  # Set 'multi' to 'true' to enable multiselect
   steps:
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
