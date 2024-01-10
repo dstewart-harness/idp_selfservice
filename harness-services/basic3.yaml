@@ -55,7 +55,7 @@ spec:
       input:
         exampleVarString: '${{ parameters.exampleVar.join(":") }}'
       output: {}
-  steps:
+
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
