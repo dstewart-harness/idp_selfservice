@@ -18,8 +18,9 @@ spec:
         owner:
           title: Choose the Owner
           type: string
-          ui:field: OwnerPicker
-          ui:options:
+          ui:
+            field: OwnerPicker
+            options: null
         github_repo:
           title: What App/Repo will this infra be associated with?
           type: string
@@ -28,8 +29,9 @@ spec:
         token:
           title: Harness Token
           type: string
-          ui:widget: password
-          ui:field: HarnessAuthToken
+          ui:
+            widget: password
+            field: HarnessAuthToken
     - title: Pass Variables Here      
       properties:
         exampleVar:
@@ -37,15 +39,16 @@ spec:
           type: array
           items:
             type: string
-              enum:
-                - Option1
-                - Option2
-                - Option3
-          default: Option1
-    ui:
-      exampleVar:
-        title: Select Options
-        multi: true
+            enum:
+              - Option1
+              - Option2
+              - Option3
+          default: 
+            - Option1
+      ui:
+        exampleVar:
+          title: Select Options
+          multi: true
   steps:
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
