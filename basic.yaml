@@ -18,52 +18,36 @@ spec:
         owner:
           title: Choose the Owner
           type: string
-          ui:
-            field: OwnerPicker
-            options: null
+          ui:field: OwnerPicker
+          ui:options:
         github_repo:
           title: What App/Repo will this infra be associated with?
           type: string
           description: someRepoName
+        # This field is hidden but needed to authenticate the request to trigger the pipeline
         token:
           title: Harness Token
           type: string
-          ui:
-            widget: password
-            field: HarnessAuthToken
+          ui:widget: password
+          ui:field: HarnessAuthToken
     - title: Pass Variables Here
       properties:
         exampleVar:
           title: Select an option
-          type: array
-          items:
-            type: string
-            enum:
-              - Option1
-              - Option2
-              - Option3
-          default:
-            - Option1
-      ui:
-        exampleVar:
-          title: Select options
-          multi: true
+          type: string
+          enum: ["Option1", "Option2", "Option3"]
+          default: Option1
   steps:
-    - id: transformVariables
-      name: Transform Variables
-      input:
-        exampleVarString: '${{ parameters.exampleVar.join(",") }}'
-      output: {}
-
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
       input:
-        url: https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE
+        url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE'
         inputset:
-          exampleVar: ${{ parameters.exampleVarString }}
+          exampleVar: ${{ parameters.exampleVar }}
           owner: ${{ parameters.owner }}
         apikey: ${{ parameters.token }}
+
   output:
     links:
       - title: Pipeline Details
