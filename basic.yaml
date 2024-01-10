@@ -47,7 +47,7 @@ spec:
           title: Select options
           multi: true
   steps: 
-    -id: transformVariables
+    - id: transformVariables
     name: transform Variables
     action: script
     input: 
@@ -58,7 +58,6 @@ spec:
         // Set the converted string as a new parameter
         parameters.exampleVarString = exampleVarString;
     output: {}
-  
   steps:
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
