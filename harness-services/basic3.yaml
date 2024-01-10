@@ -50,12 +50,6 @@ spec:
           title: Select Options
           multi: true
   steps:
-    - id: transformVariables
-      name: Transform Variables
-      input:
-        exampleVarString: '${{ parameters.exampleVar.join(":") }}'
-      output: {}
-
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
