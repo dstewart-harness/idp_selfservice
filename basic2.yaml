@@ -6,7 +6,7 @@ metadata:
   description: Use IDP to call a harness pipeline and pass it some variables
   tags:
     - example
-    - AHEAD
+    - ahead
 spec:
   owner: david.stewart
   type: environment
