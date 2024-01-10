@@ -6,7 +6,7 @@ metadata:
   description: Use IDP to call a harness pipeline and pass it some variables
   tags:
     - example
-    - ahead2
+    - ahead
 spec:
   owner: david.stewart
   type: environment
@@ -53,7 +53,7 @@ spec:
     - id: transformVariables
       name: Transform Variables
       input:
-        exampleVarString: '${{ parameters.exampleVar.join(":") }}
+        exampleVarString: '${{ parameters.exampleVar.join(":") }}'
       output: {}
   steps:
     - id: trigger
