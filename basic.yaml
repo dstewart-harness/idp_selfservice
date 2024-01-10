@@ -19,12 +19,11 @@ spec:
           title: Choose the Owner
           type: string
           ui:field: OwnerPicker
-          ui:options:
+          ui:options: null
         github_repo:
           title: What App/Repo will this infra be associated with?
           type: string
           description: someRepoName
-        # This field is hidden but needed to authenticate the request to trigger the pipeline
         token:
           title: Harness Token
           type: string
@@ -33,30 +32,30 @@ spec:
     - title: Pass Variables Here
       properties:
         exampleVar:
-          title: Select options
-          type: array  # Change the type to 'array' for a multiselect
+          title: Select an option
+          type: array
           items:
             type: string
             enum:
-              - Option1
-              - Option2
-              - Option3
-          default: ["Option1"]  # Default should be an array with one or more options
+            - Option1
+            - Option2
+            - Option3
+          default:
+            - Option1
       ui:
         exampleVar:
           title: Select options
-          multi: true  # Set 'multi' to 'true' to enable multiselect
+          multi: true
   steps:
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
       input:
-        url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE'
+        url: https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE
         inputset:
           exampleVar: ${{ parameters.exampleVar }}
           owner: ${{ parameters.owner }}
         apikey: ${{ parameters.token }}
-
   output:
     links:
       - title: Pipeline Details
