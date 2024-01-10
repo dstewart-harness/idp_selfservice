@@ -46,6 +46,19 @@ spec:
         exampleVar:
           title: Select options
           multi: true
+  steps: 
+    -id: transformVariables
+    name: transform Variables
+    action: script
+    input: 
+      content: |
+        // Convert the array to a comma-separated string
+        const exampleVarString = parameters.exampleVar.join(',');
+
+        // Set the converted string as a new parameter
+        parameters.exampleVarString = exampleVarString;
+    output: {}
+  
   steps:
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
@@ -53,7 +66,7 @@ spec:
       input:
         url: https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/IDP_Pipeline_Example/pipeline-studio/?storeType=INLINE
         inputset:
-          exampleVar: ${{ join(parameters.exampleVar, ':') }}
+          exampleVar: ${{ paramaters.exampleVarString }}
           owner: ${{ parameters.owner }}
         apikey: ${{ parameters.token }}
   output:
