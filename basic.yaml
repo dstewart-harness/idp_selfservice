@@ -48,18 +48,13 @@ spec:
         exampleVar:
           title: Select options
           multi: true
-  steps: 
+  steps:
     - id: transformVariables
-      name: transform Variables
-      action: script
-      input: 
-        content: |
-          // Convert the array to a comma-separated string
-          const exampleVarString = parameters.exampleVar.join(',');
-
-          // Set the converted string as a new parameter
-          parameters.exampleVarString = exampleVarString;
+      name: Transform Variables
+      input:
+        exampleVarString: '${{ parameters.exampleVar.join(",") }}'
       output: {}
+
     - id: trigger
       name: Call a harness pipeline, and pass the variables from above
       action: trigger:harness-custom-pipeline
