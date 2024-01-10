@@ -25,13 +25,12 @@ spec:
           title: What App/Repo will this infra be associated with?
           type: string
           description: someRepoName
-        # This field is hidden but needed to authenticate the request to trigger the pipeline
+         # This field is hidden but needed to authenticate the request to trigger the pipeline
         token:
           title: Harness Token
           type: string
-          ui:
-            widget: password
-            field: HarnessAuthToken
+          ui:widget: password
+          ui:field: HarnessAuthToken
     - title: Pass Variables Here      
       properties:
         exampleVar:
