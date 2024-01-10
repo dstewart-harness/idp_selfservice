@@ -1,11 +1,12 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: harness_basic
-  title: Call a pipeline via Harness IDP
+  name: harness_basic_ahead
+  title: Call a pipeline via Harness IDP- AHEAD
   description: Use IDP to call a harness pipeline and pass it some variables
   tags:
     - example
+    - AHEAD
 spec:
   owner: david.stewart
   type: environment
