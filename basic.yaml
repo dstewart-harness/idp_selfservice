@@ -34,8 +34,13 @@ spec:
       properties:
         exampleVar:
           title: Select an option
-          type: string
-          enum: ["Option1", "Option2", "Option3"]
+          type: array
+          items:
+            type: string
+              enum:
+                - Option1
+                - Option2
+                - Option3
           default: Option1
   steps:
     - id: trigger
