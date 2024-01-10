@@ -33,9 +33,14 @@ spec:
     - title: Pass Variables Here
       properties:
         exampleVar:
-          title: Select an option
-          type: array
-          enum: ["Option1", "Option2", "Option3"]
+          title: Select options
+          type: array  # Change the type to 'array' for a multiselect
+          items:
+            type: string
+            enum:
+              - Option1
+              - Option2
+              - Option3
           default: ["Option1"]  # Default should be an array with one or more options
       ui:
         exampleVar:
