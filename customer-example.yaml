@@ -2,11 +2,10 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: hcscexample
-  title: Call an IaCM pipeline - HCSC AWS Provisioning
-  description: Use IDP to call a Harness IACM Pipeline with some provided inputs/variables
+  title: IDP Provision Resources for New Project
+  description: Use this pipeline to provision GH Repo, JIRA Project, Harness Project and populate scaffold for new project onboarding. 
   tags:
     - example
-    - hcsc
 spec:
   owner: david.stewart
   type: environment
@@ -21,7 +20,7 @@ spec:
           type: string
           description: yourEmailAddress
         project:
-          title: What project will this infra be associated with?
+          title: What appID will this project by mapped to?
           type: string
           description: projectID
         # This field is hidden but needed to authenticate the request to trigger the pipeline
