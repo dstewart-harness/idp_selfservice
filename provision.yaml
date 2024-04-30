@@ -1,0 +1,54 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: idpprovisionnewservice
+  title: IDP Provision Resources for New Project
+  description: Use this pipeline to provision GH Repo, JIRA Project, Harness Project and populate scaffold for new project onboarding. 
+  tags:
+    - example
+spec:
+  owner: david.stewart
+  type: environment
+  parameters:
+    - title: Project and Repo Details
+      required:
+        - requester_email
+        - project
+      properties:
+        requester_email:
+          title: Enter your email
+          type: string
+          description: yourEmailAddress
+        project:
+          title: What appID will this project by mapped to?
+          type: string
+          description: projectID
+        # This field is hidden but needed to authenticate the request to trigger the pipeline
+        token:
+          title: Harness Token
+          type: string
+          ui:widget: password
+          ui:field: HarnessAuthToken
+    - title: Pass Variables Here
+      properties:
+        exampleVar:
+          title: Select an option
+          type: string
+          enum: ["Option1", "Option2", "Option3"]
+          default: Option1
+  steps:
+    - id: trigger
+      name: Call a harness pipeline, and pass the variables from above
+      action: trigger:harness-custom-pipeline
+      input:
+        url: 'https://app.harness.io/ng/account/SAsyUUHTTImuYSZ35HPDvw/home/orgs/default/projects/DavidStewart_Sandbox/pipelines/HCSC_IDP_Example/pipeline-studio/?storeType=INLINE'
+        inputset:
+          exampleVar: ${{ parameters.exampleVar }}
+          requester_email: ${{ parameters.requester_email }}
+          project: ${{ parameters.project }}
+        apikey: ${{ parameters.token }}
+
+  output:
+    links:
+      - title: Pipeline Details
+        url: ${{ steps.trigger.output.PipelineUrl }}
